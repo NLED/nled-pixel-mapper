@@ -34,4 +34,8 @@ NECESSARY SERVICING, REPAIR OR CORRECTION.
 
 See Help Menu in the app for instructions and more information.
 
+
+View Live Demo at: https://www.nledshop.com/pixelmapper/live/
+
+
 ![alt text](nled-pixel-mapper-ss-1.jpg)
