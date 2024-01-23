@@ -17,12 +17,12 @@ FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF T
 PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL 
 NECESSARY SERVICING, REPAIR OR CORRECTION.
 
- Original Author: Jeffrey Nygaard
- Company: Northern Lights Electronic Design, LLC
- Date: January 23, 2024
- Software Version: 1.0.0
- Contact: JNygaard@NLEDshop.com
- Github: www.github.com/nled/nled-pixel-mapper
+Original Author: Jeffrey Nygaard
+Company: Northern Lights Electronic Design, LLC
+Date: January 23, 2024
+Software Version: 1.0.0
+Contact: JNygaard@NLEDshop.com
+GitHub: www.github.com/nled/nled-pixel-mapper
  
 ==============          www.NLEDShop.com/pixelmapper           =============
 =============     www.NorthernLightsElectronicDesign.com       ============
