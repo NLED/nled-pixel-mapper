@@ -33,3 +33,5 @@ NECESSARY SERVICING, REPAIR OR CORRECTION.
 
 
 See Help Menu in the app for instructions and more information.
+
+![alt text](nled-pixel-mapper-ss-1.jpg)
