@@ -1,0 +1,134 @@
+.icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+}
+
+
+.height100 {
+    height: 100%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.width90 {
+    width: 90%;
+}
+
+
+.hide {
+    display: none;
+    visibility: hidden;
+}
+
+.marginAA {
+    margin: auto auto;
+}
+
+.disInline {
+    display: inline;
+}
+
+.disNone {
+    display: none;
+}
+
+.flexRGap5px {
+    row-gap: 5px;
+}
+
+.flexCGap5px {
+    column-gap: 5px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flexAIC {
+    align-items: center;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexGrow {
+    flex-grow: 1;
+}
+
+.flexJCS, .flexJCSA {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.flexJCSE {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flexJCSB {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexJCFE {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.textC {
+    text-align: center;
+}
+
+.textR {
+    text-align: right;
+}
+
+.textNoWrap {
+    white-space: nowrap;
+}
+
+.fontSz1p5 {
+    font-size: 1.5rem;
+}
+
+.fontSz2p0 {
+    font-size: 2.0rem;
+}
+
+.fontFam1 {
+    font-family: monospace;
+}
+
+
+
+.spacer10px {
+    height: 10px;
+}
+
+
+.marginR10px {
+    margin-right: 10px;
+}
+
+.padB5px {
+    padding-bottom: 5px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.noBold {
+    font-weight: normal;
+}
+
+.lineH1p5Rem {
+    line-height: 1.5rem;
+}

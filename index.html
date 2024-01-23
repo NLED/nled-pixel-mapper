@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./assets/css/assemblers.css">
+  <link rel="stylesheet" href="./assets/css/modals-lib.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <title>NLED Pixel Mapper v1-0-0</title>
+</head>
+
+<body>
+  <div id="main">
+    <div id="main-tools">
+      <div id="main-tools-info" class="textC bold lineH1p5Rem">
+        <div>Created by NLED</div>
+        <div>www.NLEDshop.com</div>
+        <div><a class="noBold" href="https://www.nledshop.com/pixelmapper" target="_blank">Webpage</a></div>
+        <button id="tools-button-help" class="marginAA">Help Menu</button>
+      </div>
+      <div class="lineH1p5Rem">
+        <h3>File:</h3>
+        <button id="tools-button-load-file" title="Opens file dialog, select a pixel map file to load">Load Map File</button>
+        <input id="input-load-file" type='file' class="disNone">
+        <button id="tools-button-save-file" title="Saves the pixel map file in the selected format with the specified name. Saved to browser's downloads folder">Save Map File</button>
+        <div class="flex" title="Loaded pixel map file name">
+          <div>File:</div>
+          <div id="tools-loaded-file-path">None</div>
+        </div>
+        <!-- <div class="noBold textC">(Saves to /downloads)</div> -->
+        <div class="spacer10px"></div>
+        <div title="Format to save the pixel map as"><span>Save Format:</span>
+          <select id="tools-dropdown-format">
+            <option data-val="json">JSON</option>
+            <option data-val="nledlegacy">NLED legacy</option>
+          </select>
+        </div>
+        <div title="File name to save to. All saved files are downloaded to the browser's downloads folder">File Name: </div><input id="field-file-name" type="text" class="width90">
+      </div>
+      <div class="flexCol flexRGap5px">
+        <h3>Tools:</h3>
+        <button id="tools-button-load-merge" title="Opens the file dialog, select a pixel map file to load, then the pixel icons can then be placed on the workspace">Load File to Merge</button>
+        <input id="input-load-mergefile" type='file' class="disNone">
+        <button id="tools-button-reset" title="Resets all the placed pixel icons">Reset</button>
+        <button id="tools-button-enable-placedrag" title="Enable then in the workspace left click and hold, dragging the mouse places icons. Disabled once mouse button is released">Enable Drag Place</button>
+        <button id="tools-button-generation-wizard" title="Opens the matrix generation wizard. After generation, the pixel icons can be placed on the workspace.">Generation Wizard</button>
+      </div>
+      <div>
+        <h3>Grid Settings:</h3>
+        <div class="textR flexCol flexRGap5px">
+          <!-- <div class="bold textNoWrap">Grid Size:<input id="grid-size-field" type="number" min="16" max="128"></div> -->
+          <div class="bold textNoWrap" title="Number of cells wide">Grid Width: <input id="grid-width-field" type="number" min="16" max="1024"></div>
+          <div class="bold textNoWrap" title="Number of cells tall">Grid Height: <input id="grid-height-field" type="number" min="16" max="1024"></div>
+          <div class="bold textNoWrap" title="Adds additional grid lines for easier placement.">Grid Divider: <input id="grid-divider-field" type="number" min="1" max="64" value="4"></div>
+          <div class="textC bold textNoWrap" title="Total number of pixel icons placed">Pixel Quantity: <span id="pixel-quantity-value" class="noBold">0</span></div>
+        </div>
+      </div>
+      <div class="textC bold">
+        <div id="tools-main-secondary-info" class="disNone lineH1p5Rem">
+          <!-- <div>Created by NLED</div> -->
+          <div>www.NLEDshop.com</div>
+          <div><a class="noBold" href="https://www.nledshop.com/pixelmapper" target="_blank">Webpage</a></div>
+          <button id="tools-button-secondaryhelp">Help Menu</button>
+
+        </div>
+        <div class="spacer10px"></div>
+        <div title="Zooms the workspace in and out. Or use mouse wheel.">
+          <span>Zoom: </span><button id="tools-zoom-reset">Reset</button><br>
+          <input id="slider-zoom-scale" class="width90" type="range" min="0.5" max="2" step="0.1">
+        </div>
+      </div>
+      <div class="flexCol flexGrow">
+        <span>Messages:</span>
+        <div id="message-terminal"></div>
+      </div>
+
+    </div>
+    <!-- ------------------------------------------------------------------------------------------------------------------- -->
+    <div id="main-workspace">
+      <div id="workspace-container">
+        <div id="main-workspace-topbar">
+          <!-- DYNAMIC -->
+        </div>
+        <div class="flex">
+          <div id="main-workspace-sidebar">
+            <!-- DYNAMIC -->
+          </div>
+          <div id="workspace">
+            <div id="main-workspace-pixels"></div>
+            <div id="workspace-selectionbox" hidden></div>
+            <div id="workspace-dividers"></div>
+            <div id="selection-drop-indicator"></div>
+            <div id="selection-drop-indicator-vert"></div>
+            <div id="selection-drop-indicator-horiz"></div>
+
+            <div id="context-menu">
+              <span id="context-menu-title"><!-- DYNAMIC--></span>
+              <ul id="context-menu-action-list">
+                <li data-val="deleteicon" title="Deletes the icon and leaves the ID empty, placing additional icons will take its place.">Delete Icon</li>
+                <li data-val="deleteiconshift" title="Deletes the icon and shifts all higher ID numbers down to fill the place.">Delete Icon, Shift</li>
+                <li data-val="deleteafter" title="Deletes all icons with ID numbers larger than this icons.">Delete All After</li>
+                <li data-val="deletebefore" title="Deletes all icons with lower ID numbers than this icon. Leaving the deleted ID numbers empty.">Delete All Before</li>
+                <li data-val="deletebeforeshift" title="Deletes all icons with lower ID numbers than this icon. This icon and higher ID numbers will shift down.">Delete All Before, Shift</li>
+                <li data-val="deleteselection">Delete Selection</li>
+                <li data-val="deleteselectionshift">Delete Selection, Shift</li>
+                <li data-val="insertafter">Insert After</li>
+                <li data-val="mirrorselectionhoriz">Mirror Selection, Horizontal</li>
+                <li data-val="mirrorselectionvert">Mirror Selection, Vertical</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------------------------------------- -->
+    <div id="modals" class="hide">
+      <div id="modal-fog"> </div>
+
+      <div id="modal-genwizard" class="modalMenu hide">
+        <div class="modalClose modalCloseWht"></div>
+        <h2>Generation Wizard</h2>
+        <div class="flex">
+          <div class="disInline" style="width:300px;">
+
+          <p>TODO: Add rest of the generation methods. Only one is enabled</p>
+            <div class="padB5px"><span>Mode:</span>
+              <select id="modal-genwizard-input-mode">
+                <option data-val="snake-b-ltor">Snake, Bottom, Left to Right</option>
+                <option data-val="snake-b-rtol" disabled>Snake, Bottom, Right to Left</option>
+                <option data-val="snake-t-ltor" disabled>Snake, Top, Left To Right</option>
+                <option data-val="snake-t-rtol" disabled>Snake, Top, Right to Left</option>
+              </select>
+            </div>
+            <div class="flex">
+              <div class="flexCol textR marginR10px flexRGap5px">
+                <div>Height(pixels): </div>
+                <div>Width(pixels): </div>
+              </div>
+              <div class="flexCol flexRGap5px">
+                <input id="modal-genwizard-input-height" type="number" min="1" max="2048" value="8">
+                <input id="modal-genwizard-input-width" type="number" min="1" max="2048" value="8">
+              </div>
+            </div>
+            <div id="modal-genwizard-input-gencont"> <button id="modal-genwizard-input-generate">Generate</button></div>
+          </div>
+          <div id="modal-genwizard-previewbox">
+            preview image(not implemented)
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-insertamount" class="modalMenu hide">
+        <div class="flexCol flexJCSB height100 textC">
+          <div>Amount of pixels to insert?</div>
+          <input id="modal-insertamount-value" type="number" class="textC">
+          <div class="flex flexJCSA">
+            <button id="modal-insertamount-cancel">Cancel</button>
+            <button id="modal-insertamount-confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-reseticons" class="modalMenu hide">
+        <div class="flexCol flexJCSB height100 textC">
+          <div>Reset Workspace? All icon placements are removed.</div>
+          <div class="flex flexJCSA">
+            <button id="modal-reseticons-cancel">Cancel</button>
+            <button id="modal-reseticons-confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="modal-allmatrixfail" class="modalMenu hide">
+        <div class="flexCol flexJCSB height100 textC">
+          <div>Was not able to connect to the AllMatrix server. Disable connection? If disabled file saves will be sent to the browser's downloads folder.</div>
+          <div class="flex flexJCSA">
+            <button id="modal-allmatrixfail-cancel">No</button>
+            <button id="modal-allmatrixfail-confirm">Yes</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-help" class="modalMenu hide">
+        <div class="modalClose modalCloseWht"></div>
+        <h1 class="textC">Help</h1>
+        <div id="modal-help-container" class="height100 ">
+          <p>Northern Lights Electronic Desgin, LLC
+            <br>Released: 1/22/2023
+            <br>Version: 1.0.0
+            <br>Author: Jeffrey Nygaard
+            <br>MIT License
+            <br><a href="https://www.NLEDshop.com/pixelmapper" target="_blank">www.NLEDshop.com/pixelmapper</a>
+            <br><a href="https://www.github.com/nled" target="_blank">www.github.com/nled/nled-pixel-mapper</a>
+            <br><a href="https://www.nledshop.com/contact/" target="_blank">Contact Page for Feedback and Bug Reports</a>
+          </p>
+          <h3>How To</h3>
+          <p>
+          <ul>
+            <li>The workspace shows a grid layout that represenets the LED pixel positions relative to each other. The numbered order of the icons relates to the LED pixels position on the physical LED string connected to the controller.
+            </li>
+            <li>Use "Load Map File" to open an existing pixel map file to edit.</li>
+            <li>Clicking on the workspace places a single LED icon, with an incrementing order number.</li>
+            <li>Clicking and holding pressed then dragging allows selection of a group of pixel icons. Once selected the icons are grouped and actions can be applied. Actions such as move by dragging, deleted, or copied.</li>
+            <li>Right clicking on a pixel icon opens a context menu with additional actions.</li>
+            <li>
+              "Load File to Merge" loads a pixel map file, builds the pixel icons as a group, maintaining their relative positions. The group of icons can then be placed on the workspace.
+            </li>
+            <li>Mouse over interface elements to view a pop up of it's function</li>
+            <li>Saving map files will download them to the browser's default downloads folder. There is no way to save the files anywhere else, it is controlled by the browser.</li>
+            <li>Opening this app from NLED AllMatrix will automatically set it up to connect to the AllMatrix server to perform file saves. The map files are saved to 'AllMatrix/maps' folder. AllMatrix is notified that a map file has been updated. If the map file is actively being used by AllMatrix, the new version will be automatically loaded. That makes testing pixel maps much quicker.</li>
+          </ul>
+          </ul>
+          </p>
+          <h3>Hotkeys</h3>
+          <p> <kbd>ctrl</kbd>+<kbd>z</kbd> Undo last action</p>
+          <p><kbd>ctrl</kbd>+<kbd>y</kbd> Redo previous action</p>
+          <p><kbd>ctrl</kbd>+<kbd>c</kbd> Copy selection</p>
+          <p><kbd>ctrl</kbd>+<kbd>v</kbd> Paste the copied selection</p>
+          <p><kbd>Mouse, L Button</kbd> Hold and drag to select a group. Click to place an icon. Or click an icon and hold pressed to drag it.</p>
+          <p><kbd>Mouse, R Button</kbd> While over a pixle icon, opens context menu</p>
+          <p><kbd>ctrl</kbd>+<kbd>Mouse, L Button</kbd>Hold control then click a pixel icon to add it to the group selection.</p>
+          <p><kbd>Mouse Wheel</kbd> Up or down over the workspace will zoom in and out</p>
+          <p><kbd>ctrl</kbd>+<kbd>Mouse Wheel</kbd> Scroll workspace left and right</p>
+          <p><kbd>alt</kbd>+<kbd>Mouse Wheel</kbd> Scroll workspace up and down</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------------------------ -->
+
+  <script src='./assets/js/functions.js'></script>
+  <script src='./assets/js/userinput.js'></script>
+  <script src='./assets/js/modals-lib.js'></script>
+  <script src='./assets/js/events.js'></script>
+  <script src='./assets/js/map-class.js'></script>
+  <script src='./assets/js/state.js' defer></script>
+
+</body>
+
+</html>
