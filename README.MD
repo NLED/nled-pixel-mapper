@@ -28,10 +28,8 @@ NECESSARY SERVICING, REPAIR OR CORRECTION.
 - Software Version: 1.0.0
 - Contact: JNygaard@NLEDshop.com
 - GitHub: www.github.com/nled/nled-pixel-mapper
- 
-
-www.NLEDShop.com/pixelmapper
-www.NorthernLightsElectronicDesign.com 
+- www.NLEDShop.com/pixelmapper
+- www.NorthernLightsElectronicDesign.com 
 
 
 See Help Menu in the app for instructions and more information.
