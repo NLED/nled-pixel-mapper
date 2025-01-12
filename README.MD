@@ -24,8 +24,8 @@ NECESSARY SERVICING, REPAIR OR CORRECTION.
 
 - Original Author: Jeffrey Nygaard
 - Company: Northern Lights Electronic Design, LLC
-- Date: January 23, 2024
-- Software Version: 1.0.0
+- Date: January 12, 2025
+- Software Version: 1.1.0
 - Contact: JNygaard@NLEDshop.com
 - GitHub: www.github.com/nled/nled-pixel-mapper
 - www.NLEDShop.com/pixelmapper
