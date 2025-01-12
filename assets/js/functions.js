@@ -208,17 +208,24 @@ function loadMapFile(data, method, extension) {
 
         if (jsonParsed.hasOwnProperty('settings')) {
             appState.grid.size = 32;//set to default //jsonParsed.settings.size;
-            appState.grid.width = jsonParsed.settings.width;
-            appState.grid.height = jsonParsed.settings.height;
+            appState.grid.width = jsonParsed.settings.gridWidth;
+            appState.grid.height = jsonParsed.settings.gridHeight;
             appState.grid.length = jsonParsed.settings.length;
         }
 
+        let pixArray = JSON.parse(JSON.stringify(jsonParsed.map))
+        let pixArrayConvert = [];
+
+        for (const pix of pixArray) {
+            pixArrayConvert.push({ x: pix[0]-1, y: pix[1]-1 });
+        }
+
         if (method == 'load') {
-            appState.pixelArray = JSON.parse(JSON.stringify(jsonParsed.map)); //deep copy
+            appState.pixelArray = JSON.parse(JSON.stringify(pixArrayConvert)); //deep copy
             pixelWorkspaceRender();
         }
         else if (method == "merge") {
-            appState.copyBuffer = JSON.parse(JSON.stringify(jsonParsed.map)); //deep copy
+            appState.copyBuffer = JSON.parse(JSON.stringify(pixArrayConvert)); //deep copy
             pixelMap.iconMerge();
         }
     }
@@ -233,15 +240,14 @@ function pixelWorkspaceRender(renderPixels = true) {
     document.getElementById("workspace-dividers").innerHTML = "";
     document.getElementById("main-workspace-topbar").innerHTML = `<div class="topAxisLabel spacer" style=""></div>`; //start with shim div
     document.getElementById("main-workspace-sidebar").innerHTML = "";
-    //document.getElementById("workspace-container").style.width = (appState.grid.size * appState.grid.width) + 50 + 50+ "px"; //50 is the width of the sidebar
-    // document.getElementById("workspace-container").style.height = (appState.grid.size * appState.grid.height) + 50 + "px";
 
     if (renderPixels) {
         document.getElementById("main-workspace-pixels").innerHTML = "";
         let pixelsCont = document.getElementById("main-workspace-pixels");
-
+        console.log(appState.pixelArray);
         for (let i = 0; i < appState.pixelArray.length; i++) {
             if (!isNaN(appState.pixelArray[i].x) && !isNaN(appState.pixelArray[i].y)) {
+                console.log(i);
                 let pixElem = pixelMap.iconCreate(i);
                 pixelsCont.insertAdjacentElement('beforeend', pixElem);
             }
