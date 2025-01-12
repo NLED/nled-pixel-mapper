@@ -1,7 +1,7 @@
 'use strict'
 
 document.addEventListener('keydown', userinputKeydown)
-document.addEventListener('mousewheel', userinputMouseWheel, { passive: false });
+document.body.addEventListener('wheel', userinputMouseWheel, { passive: false });
 
 function userinputKeydown(e) {
     // console.log(e);
@@ -10,7 +10,7 @@ function userinputKeydown(e) {
 }
 
 function userinputMouseWheel(e) {
-    // console.log(e)
+//    console.log(e)
     if (appState.modalOpen) return;
     e.stopPropagation();
     e.preventDefault();
@@ -18,17 +18,17 @@ function userinputMouseWheel(e) {
     let ctrl = e.ctrlKey || e.metaKey; //should catch ctrl and mac cmd
 
     if (ctrl) {
-        if (e.wheelDeltaY == -180) document.getElementById("main-workspace").scrollLeft += appState.grid.size;
+        if (e.wheelDeltaY < 0) document.getElementById("main-workspace").scrollLeft += appState.grid.size;
         else document.getElementById("main-workspace").scrollLeft -= appState.grid.size;
     }
     else if (e.altKey) {
 
-        if (e.wheelDeltaY == -180) document.getElementById("main-workspace").scrollTop += appState.grid.size;
+        if (e.wheelDeltaY < 0) document.getElementById("main-workspace").scrollTop += appState.grid.size;
         else document.getElementById("main-workspace").scrollTop -= appState.grid.size;
     }
     else {
         //console.log(e.altKey);
-        if (e.wheelDeltaY == -180) appState.zoomValue -= 0.1;
+        if (e.wheelDeltaY < 0) appState.zoomValue -= 0.1;
         else appState.zoomValue += 0.1;
         eventSetZoom();
     }
